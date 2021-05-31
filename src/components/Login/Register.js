@@ -30,17 +30,27 @@ const isNombre_usuario = value =>{
     if(value.length < 3 || value.length > 20){
         return(
             <div className="alert alert-danger" role="alert">
-                El nombre de usuario debe ser por lo menos 20 caracteres
+                El nombre de usuario debe ser por lo menos 3 caracteres
+            </div>
+        )
+    }
+}
+
+const isDate = value =>{
+    if(value === Date.now()){
+        return(
+            <div className="alert alert-danger" role="alert">
+                Esta fecha no esta disponible
             </div>
         )
     }
 }
 
 const isContraseña = (value) =>{
-    if(value.length < 6 || value.length > 20){
+    if(value.length < 8 || value.length > 20){
         return(
             <div className="alert alert-danger" role="alert">
-                La contraseña debe ser por lo menos de 6 caracteres y maximo 20
+                La contraseña debe ser por lo menos de 8 caracteres y maximo 20
             </div>
         )
     }
@@ -219,7 +229,7 @@ export default class Register extends Component {
                                     name="fecha_nacimiento"
                                     value={this.state.fecha_nacimiento}
                                     onChange={this.onChangeFecha_nacimiento}
-                                    validations={[required]}
+                                    validations={[required, isDate]}
                                     />
                                 </div>
                                 <div className="form-group">
