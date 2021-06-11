@@ -75,32 +75,36 @@ class App extends Component {
                   Actualizar Libro
                 </Link>
             </li> */}
-            <li className="nav-item">
-                <Link to={"/crearLibro"} className="nav-link">
-                  Crear libro
-                </Link>
-            </li>
-            <li className="nav-item">
-                <Link to={"/crearReserva"} className="nav-link">
-                  Crear reserva
-                </Link>
-            </li>
-            {/* <li className="nav-item">
-                <Link to={"/actualizarReserva"} className="nav-link">
-                  Actualizar reserva
-                </Link>
-            </li> */}
-            <li className="nav-item">
-                <Link to={"/mostrarReserva"} className="nav-link">
-                  Mostrar reserva
-                </Link>
-            </li>
-            
-            <li className="nav-item">
+            {currentUser && (
+              <li className="nav-item">
                 <Link to={"/mostrarLibro"} className="nav-link">
                   Mostrar libro
                 </Link>
             </li>
+            )}
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/mostrarReserva"} className="nav-link">
+                  Mostrar reserva
+                </Link>
+            </li>
+            )}
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/crearReserva"} className="nav-link">
+                  Crear reserva
+                </Link>
+            </li>
+            )}
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/crearLibro"} className="nav-link">
+                  Crear libro
+                </Link>
+            </li>
+            )}
+
+
 {/* 
             {showAdminBoard && (
               <li className="nav-item">
