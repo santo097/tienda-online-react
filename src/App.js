@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import './App.css'
+import Fondo from  './background.jpg'
 import AuthService from "./services/auth.services";
 import Login from "./components/Login/Login";
 import Register from "./components/Login/Register";
@@ -48,7 +49,7 @@ class App extends Component {
     const { currentUser, showClienteBoard, showAdminBoard } = this.state;
 
     return (
-      <div>
+      <div  style={ sectionStyle } >
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"></link>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
@@ -152,9 +153,10 @@ class App extends Component {
             </div>
           )}
         </nav>
-
+        
+        
         <div className="container mt-3">
-        <Switch>
+        <Switch >
           <Route exact path={["/", "/home"]} component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
@@ -174,5 +176,10 @@ class App extends Component {
     );
   }
 }
+const sectionStyle = {
+  width: "100%",
+  height: "600px",
+  backgroundImage: `url(${Fondo})`
+};
 
 export default App;

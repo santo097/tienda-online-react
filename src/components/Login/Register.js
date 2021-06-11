@@ -36,8 +36,10 @@ const isNombre_usuario = value =>{
     }
 }
 
+
+
 const isDate = value =>{
-    if(value === Date.now()){
+    if(Date.parse(Date.now())){
         return(
             <div className="alert alert-danger" role="alert">
                 Esta fecha no esta disponible
@@ -51,6 +53,13 @@ const isContraseña = (value) =>{
         return(
             <div className="alert alert-danger" role="alert">
                 La contraseña debe ser por lo menos de 8 caracteres y maximo 20
+            </div>
+        )
+    }
+    if(!value.indexOf(" ")){
+        return(
+            <div className="alert alert-danger" role="alert">
+            La contraseña no debe tener espacios wdqwsq
             </div>
         )
     }
@@ -104,6 +113,7 @@ export default class Register extends Component {
         });
     }
     onChangeFechaNacimiento(e){
+        console.log(e.target.value);
         this.setState({
             fecha_nacimiento:e.target.value
         });
@@ -127,40 +137,39 @@ export default class Register extends Component {
         this.form.validateAll();
 
         if(this.checkBtn.context._errors.length === 0){
-
-            AuthService.register(
-                this.state.nombre_usuario,
-                this.state.cedula,
-                this.state.direccion_casa,
-                this.state.correo,
-                this.state.fecha_nacimiento,
-                this.state.noticias,
-                this.state.libros_pendiente,
-                this.state.contraseña,
-                
-
-            )
-            .then(
-                response =>{
-                    this.setState({
-                        message: response.data.message,
-                        successful: true
+                AuthService.register(
+                    this.state.nombre_usuario,
+                    this.state.cedula,
+                    this.state.direccion_casa,
+                    this.state.correo,
+                    this.state.fecha_nacimiento,
+                    this.state.noticias,
+                    this.state.libros_pendiente,
+                    this.state.contraseña,
+                    
+    
+                )
+                .then(
+                    response =>{
+                        this.setState({
+                            message: response.data.message,
+                            successful: true
+                          });
+                    },
+                    error =>{
+                        const resMessage =
+                        (error.response &&
+                          error.response.data &&
+                          error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+            
+                      this.setState({
+                        successful: false,
+                        message: resMessage
                       });
-                },
-                error =>{
-                    const resMessage =
-                    (error.response &&
-                      error.response.data &&
-                      error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-        
-                  this.setState({
-                    successful: false,
-                    message: resMessage
-                  });
-                }
-            );
+                    }
+                );
         }
     }
 
