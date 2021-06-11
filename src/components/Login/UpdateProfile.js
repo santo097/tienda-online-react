@@ -84,7 +84,7 @@ export default class UpdateProfile extends Component{
     componentDidMount(){
         const currentUser = AuthService.getCurrentUser();
         console.log(currentUser.id);
-        axios.get('http://localhost:3000/api/usuarios/'+currentUser.id, {headers:authHeader()})
+        axios.get('https://tienda-libros.herokuapp.com/api/usuarios/'+currentUser.id, {headers:authHeader()})
         .then(user =>{
             this.setState({
                 nombre_usuario:user.data.nombre_usuario
