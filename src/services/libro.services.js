@@ -3,11 +3,11 @@ import authHeader from './auth-header';
 
 class Libro{
     Mostrar = ()=>{
-        return axios.get('http://localhost:3000/api/libro', {headers:authHeader()});
+        return axios.get('https://tienda-libros.herokuapp.com/api/libro', {headers:authHeader()});
     }
 
     Guardar = (titulo,autor,año_publicacion,genero,num_paginas,editorial,issn,idioma,estado,cantidad) =>{
-        return axios.post('http://localhost:3000/api/libro/guardar',
+        return axios.post('https://tienda-libros.herokuapp.com/api/libro/guardar',
         {
             titulo,
             autor,

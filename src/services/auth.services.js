@@ -42,7 +42,7 @@ class AuthService {
 
     update(id,nombre_usuario, cedula, direccion_casa, correo, fecha_nacimiento,noticias, libros_pendiente, contraseña, roles) {
       roles = ["cliente"];
-      return axios.post('http://localhost:3000/api/update/' + id, {
+      return axios.post('https://tienda-libros.herokuapp.com/api/update/' + id, {
         nombre_usuario,
         cedula,
         direccion_casa,

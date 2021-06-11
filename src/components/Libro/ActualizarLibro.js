@@ -50,7 +50,7 @@ export default class ActualizarLibro extends Component{
     componentDidMount(){
         const currentUser = AuthService.getCurrentUser();
         console.log(currentUser.id);
-        axios.get('http://localhost:3000/api/libro/'+currentUser.id, {headers:authHeader()})
+        axios.get('https://tienda-libros.herokuapp.com/api/libro/'+currentUser.id, {headers:authHeader()})
         .then(user =>{
             console.log(user.data);
             this.setState({

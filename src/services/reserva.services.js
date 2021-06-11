@@ -5,7 +5,7 @@ import authHeader from './auth-header';
 
 class Reserva{
     Guardar = (id_usuario,libro,cantidad) =>{
-        return axios.post('http://localhost:3000/api/reserva/guardar',
+        return axios.post('https://tienda-libros.herokuapp.com/api/reserva/guardar',
         {
             id_usuario,
             libro,
@@ -14,11 +14,11 @@ class Reserva{
     }
 
     Mostrar = () =>{
-        return axios.get('http://localhost:3000/api/reserva',{headers:authHeader()} )
+        return axios.get('https://tienda-libros.herokuapp.com/api/reserva',{headers:authHeader()} )
     }
 
     BuscarPorId = (id) =>{
-        return axios.get('http://localhost:3000/api/reserva/'+ id,{headers:authHeader()} )
+        return axios.get('https://tienda-libros.herokuapp.com/api/reserva/'+ id,{headers:authHeader()} )
     }
 }
 

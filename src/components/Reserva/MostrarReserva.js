@@ -23,7 +23,7 @@ export default class MostrarLibro extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:3000/api/reserva', {headers:authHeader()})
+        axios.get('https://tienda-libros.herokuapp.com/api/reserva', {headers:authHeader()})
         .then(reserva =>{
           this.setState({reserva:reserva.data});
         })
