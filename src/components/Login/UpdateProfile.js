@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
+// import {Redirect} from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-
 import AuthService from '../../services/auth.services';
-
+import axios from 'axios';
+import authHeader from '../../services/auth-header';
 const required = value => {
     if (!value) {
       return (
@@ -56,17 +57,15 @@ const isContraseña = (value) =>{
     }
 }
 
-export default class Register extends Component {
+export default class UpdateProfile extends Component{
     constructor(props){
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
         this.onChangeNombreUsuario = this.onChangeNombreUsuario.bind(this);
         this.onChangeCedula = this.onChangeCedula.bind(this);
         this.onChangeDireccionCasa = this.onChangeDireccionCasa.bind(this);
-        this.onChangeCorreo = this.onChangeCorreo.bind(this);
         this.onChangeFechaNacimiento = this.onChangeFechaNacimiento.bind(this);
         this.onChangeContraseña = this.onChangeContraseña.bind(this);
-        
         this.state = {
             nombre_usuario:"",
             cedula:0,
@@ -82,6 +81,32 @@ export default class Register extends Component {
         }
     }
 
+    componentDidMount(){
+        const currentUser = AuthService.getCurrentUser();
+        console.log(currentUser.id);
+        axios.get('http://localhost:3000/api/usuarios/'+currentUser.id, {headers:authHeader()})
+        .then(user =>{
+            this.setState({
+                nombre_usuario:user.data.nombre_usuario
+            })
+            this.setState({
+                cedula:user.data.cedula
+            })
+            this.setState({
+                direccion_casa:user.data.direccion_casa
+            })
+            this.setState({
+                correo:user.data.correo
+            })
+            this.setState({
+                fecha_nacimiento:user.data.fecha_nacimiento
+            })
+            this.setState({
+                contraseña:user.data.contraseña
+            })
+        })    
+    }
+
     onChangeNombreUsuario(e){
         this.setState({
             nombre_usuario: e.target.value
@@ -93,21 +118,17 @@ export default class Register extends Component {
             cedula:e.target.value
         });
     }
+
     onChangeDireccionCasa(e){
         this.setState({
             direccion_casa:e.target.value
         });
     }
-    onChangeCorreo(e){
-        this.setState({
-            correo:e.target.value
-        });
-    }
+
     onChangeFechaNacimiento(e){
         this.setState({
             fecha_nacimiento:e.target.value
         });
-        
     }
 
     onChangeContraseña(e){
@@ -115,7 +136,6 @@ export default class Register extends Component {
             contraseña:e.target.value
         });
     }
-
 
     handleRegister(e){
         e.preventDefault();
@@ -127,8 +147,9 @@ export default class Register extends Component {
         this.form.validateAll();
 
         if(this.checkBtn.context._errors.length === 0){
-
-            AuthService.register(
+            const currentUser = AuthService.getCurrentUser();
+            AuthService.update(
+                currentUser.id,
                 this.state.nombre_usuario,
                 this.state.cedula,
                 this.state.direccion_casa,
@@ -165,31 +186,26 @@ export default class Register extends Component {
     }
 
     render(){
+        
         return(
-            <div className="col-md-12">
-                <div className="card card-container">
-                    <img 
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                    alt="profile-image"
-                    className="profile-img-card"
-                    />
-    
-                    <Form onSubmit={this.handleRegister} ref={c =>{this.form = c;}}>
-                        {!this.state.successful && (
-                            <div>
-                                <div className="form-group">
-                                    <label htmlFor="nombre_usuario">Nombre usuario</label>
-                                    <Input 
+            <div className="row">
+            
+                <Form onSubmit={this.handleRegister} ref={c =>{this.form = c;}}>
+                {!this.state.successful && (                <div>
+                <div className="mb-3">
+                <label htmlFor="nombre_usuario">Nombre usuario</label>
+                <Input 
                                     type="text"
                                     className="form-control"
                                     name="nombre_usuario"
                                     value={this.state.nombre_usuario}
                                     onChange={this.onChangeNombreUsuario}
                                     validations={[required, isNombre_usuario]}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="cedula">Cedula</label>
+                />
+                </div>
+
+                <div className="mb-3">
+                <label htmlFor="cedula">Cedula</label>
                                     <Input 
                                     type="number"
                                     className="form-control"
@@ -197,21 +213,22 @@ export default class Register extends Component {
                                     value={this.state.cedula}
                                     onChange={this.onChangeCedula}
                                     validations={[required]}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="direccion_casa">Direccion casa</label>
-                                    <Input 
-                                    type="text"
-                                    className="form-control"
-                                    name="direccion_casa"
-                                    value={this.state.direccion_casa}
-                                    onChange={this.onChangeDireccion_casa}
-                                    validations={[required]}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="correo">Correo</label>
+                />
+                </div>
+
+                <div className="mb-3">
+                <label htmlFor="direccion_casa">Direccion casa</label>
+                <Input 
+                    type="text"
+                    className="form-control"
+                    name="direccion_casa"
+                    value={this.state.direccion_casa}
+                    onChange={this.onChangeDireccion_casa}
+                    validations={[required]}
+                />
+                </div>
+                <div className="mb-3">
+                <label htmlFor="correo">Correo</label>
                                     <Input 
                                     type="text"
                                     className="form-control"
@@ -220,9 +237,9 @@ export default class Register extends Component {
                                     onChange={this.onChangeCorreo}
                                     validations={[required, validEmail]}
                                     />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="fecha_nacimiento">Fecha nacimiento</label>
+                </div>
+                <div className="mb-3">
+                <label htmlFor="fecha_nacimiento">Fecha nacimiento</label>
                                     <Input 
                                     type="date"
                                     className="form-control"
@@ -231,9 +248,9 @@ export default class Register extends Component {
                                     onChange={this.onChangeFecha_nacimiento}
                                     validations={[required, isDate]}
                                     />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="contraseña">Contraseña</label>
+                </div>
+                <div className="mb-3">
+                <label htmlFor="contraseña">Contraseña</label>
                                     <Input 
                                     type="password"
                                     className="form-control"
@@ -243,14 +260,12 @@ export default class Register extends Component {
                                     validations={[required, isContraseña
                                     ]}
                                     />
-                                </div>
-    
-                                <div className="form-group">
-                                    <button className="btn btn-primary btn-block">Registro</button>
-                                </div>
-                            </div>
-                        )}
-    
+                </div>
+                <div className="form-group">
+                    <button className="btn btn-primary btn-block">Actualizar</button>
+                </div>
+                </div>)}
+
                 {this.state.message && (
                     <div className="form-group">
                         <div className={
@@ -264,19 +279,14 @@ export default class Register extends Component {
                     </div>
                 )}
 
-            <CheckButton
+                <CheckButton
               style={{ display: "none" }}
               ref={c => {
                 this.checkBtn = c;
               }}
             />
-                    </Form>
-                </div>
+            </Form>
             </div>
         )
     }
-
 }
-
-
-

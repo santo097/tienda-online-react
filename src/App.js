@@ -8,7 +8,13 @@ import Home from "./components/Layouts/Home";
 import Profile from "./components/Login/Profile";
 import BoardAdmin from "./components/Admin/BoardAdmin";
 import BoardCliente from "./components/Clientes/BoardClientes";
-
+import UpdateProfile from './components/Login/UpdateProfile';
+import CrearLibro from './components/Libro/CrearLibro';
+import ActualizarLibro from './components/Libro/ActualizarLibro';
+import ActualizarReserva from './components/Reserva/ActualizarReserva';
+import CrearReserva from './components/Reserva/CrearReserva';
+import MostrarReserva from "./components/Reserva/MostrarReserva";
+import MostrarLibro from "./components/Libro/MostrarLibro";
 
 class App extends Component {
   constructor(props) {
@@ -49,12 +55,6 @@ class App extends Component {
             COMPRA DE LIBROS ONLINE
           </Link>
           <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li>
-
             {showClienteBoard && (
               <li className="nav-item">
                 <Link to={"/cliente"} className="nav-link">
@@ -62,14 +62,53 @@ class App extends Component {
                 </Link>
               </li>
             )}
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/actualizarCliente"} className="nav-link">
+                  Actualizar 
+                </Link>
+              </li>
+            )}
 
+            {/* <li className="nav-item">
+                <Link to={"/actualizarLibro"} className="nav-link">
+                  Actualizar Libro
+                </Link>
+            </li> */}
+            <li className="nav-item">
+                <Link to={"/crearLibro"} className="nav-link">
+                  Crear libro
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link to={"/crearReserva"} className="nav-link">
+                  Crear reserva
+                </Link>
+            </li>
+            {/* <li className="nav-item">
+                <Link to={"/actualizarReserva"} className="nav-link">
+                  Actualizar reserva
+                </Link>
+            </li> */}
+            <li className="nav-item">
+                <Link to={"/mostrarReserva"} className="nav-link">
+                  Mostrar reserva
+                </Link>
+            </li>
+            
+            <li className="nav-item">
+                <Link to={"/mostrarLibro"} className="nav-link">
+                  Mostrar libro
+                </Link>
+            </li>
+{/* 
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/admin"} className="nav-link">
                   Admin Board
                 </Link>
               </li>
-            )}
+            )} */}
 
             {currentUser && (
               <li className="nav-item">
@@ -118,6 +157,13 @@ class App extends Component {
           <Route exact path="/profile" component={Profile} />
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/cliente" component={BoardCliente} />
+          <Route path="/actualizarCliente" component={UpdateProfile} />
+          <Route path="/actualizarLibro" component={ActualizarLibro} />
+          <Route path="/crearLibro" component={CrearLibro} />
+          <Route path="/crearReserva" component={CrearReserva} />
+          <Route path="/actualizarReserva" component={ActualizarReserva} />
+          <Route path="/mostrarReserva" component={MostrarReserva} />
+          <Route path="/mostrarLibro" component={MostrarLibro} />
         </Switch>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { isEmail } from "validator";
 
 import AuthService from '../../services/auth.services';
 
+
 const required = value => {
     if (!value) {
       return (
@@ -56,7 +57,7 @@ const isContraseña = (value) =>{
     }
 }
 
-export default class Register extends Component {
+export default class UpdateClientes extends Component {
     constructor(props){
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
@@ -107,7 +108,7 @@ export default class Register extends Component {
         this.setState({
             fecha_nacimiento:e.target.value
         });
-        
+        console.log(this.state.fecha_nacimiento)
     }
 
     onChangeContraseña(e){
@@ -115,7 +116,6 @@ export default class Register extends Component {
             contraseña:e.target.value
         });
     }
-
 
     handleRegister(e){
         e.preventDefault();
@@ -137,8 +137,6 @@ export default class Register extends Component {
                 this.state.noticias,
                 this.state.libros_pendiente,
                 this.state.contraseña,
-                
-
             )
             .then(
                 response =>{
@@ -235,7 +233,7 @@ export default class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="contraseña">Contraseña</label>
                                     <Input 
-                                    type="password"
+                                    type="text"
                                     className="form-control"
                                     name="contraseña"
                                     value={this.state.contraseña}
@@ -277,6 +275,3 @@ export default class Register extends Component {
     }
 
 }
-
-
-

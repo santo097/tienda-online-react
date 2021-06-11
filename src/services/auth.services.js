@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import authHeader from './auth-header';
 const API_URL = 'https://tienda-libros.herokuapp.com/api/auth/';
 
 // Registro de usuarios
@@ -38,6 +38,21 @@ class AuthService {
         contraseña,
         roles
     });
+    }
+
+    update(id,nombre_usuario, cedula, direccion_casa, correo, fecha_nacimiento,noticias, libros_pendiente, contraseña, roles) {
+      roles = ["cliente"];
+      return axios.post('http://localhost:3000/api/update/' + id, {
+        nombre_usuario,
+        cedula,
+        direccion_casa,
+        correo,
+        fecha_nacimiento,
+        noticias,
+        libros_pendiente,
+        contraseña,
+        roles
+    },{headers:authHeader()});
     }
   
     getCurrentUser() {
