@@ -3,6 +3,8 @@ import React, {Component} from "react";
 import {Link } from "react-router-dom";
 import AuthService from "../../services/auth.services";
 import authHeader from '../../services/auth-header';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faEye, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const Libro = props =>(
   <tr>
@@ -14,8 +16,7 @@ const Libro = props =>(
     <td>{props.libro.editorial}</td>
     <td>{props.libro.issn}</td>
     <td>{props.libro.cantidad}</td>
-    {/* <td><Link to="/actualizarLibro"></Link></td>
-    <td><Link to="#"></Link></td> */}
+    <td><Link to={"/actualizarLibro/"+props.libro.id} className="btn btn-success"><FontAwesomeIcon icon={faEdit}/></Link> </td>
   </tr>
 
 )
@@ -56,12 +57,14 @@ export default class MostrarLibro extends Component{
     <th scope="col">Editorial</th>
     <th scope="col">Issn</th>
     <th scope="col">Cantidad</th>
+    <th scope="col">Acciones</th>
   </tr>
 </thead>
 <tbody>
 {this.Libros()}
 </tbody>
 </table>
+  <div><Link to="/crearLibro" className="btn btn-success"><FontAwesomeIcon icon={faPlus}/> Crear libro</Link></div>
           </div>
         )
     }

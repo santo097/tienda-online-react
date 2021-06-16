@@ -15,15 +15,9 @@ const required = value => {
     }
   };
 
-// const Libros = props =>(
-//     <option><Input 
-//     type="number"
-//     className="form-control"
-//     name="cantidad"
-//     value={props.libro.titulo}
-    
-//     validations={[required]} />{props.libro.titulo}</option>
-// );
+const Libros = props =>(
+    <option>{props.libro.titulo}</option>
+);
 
 export default class CrearReserva extends Component{
     constructor(props){
@@ -104,11 +98,11 @@ export default class CrearReserva extends Component{
         }
     }
 
-    // TodosLibros(){
-    //     return this.state.titulo.map((actualLibro, i)=>{
-    //         return <Libros libro={actualLibro} key={i} onChange={this.onChangeLibro}/>
-    //     })
-    // }
+    TodosLibros(){
+        return this.state.titulo.map((actualLibro, i)=>{
+            return <Libros libro={actualLibro} key={i}/>
+        })
+    }
 
     render(){
 
@@ -118,14 +112,10 @@ export default class CrearReserva extends Component{
                 <Form onSubmit={this.handleRegister} ref={c =>{this.form = c;}}>
                 {!this.state.successful && (                <div>
                 <div className="mb-3">
-                <label htmlFor="libro">Libro</label>                
-                    <Input 
-                                    type="text"
-                                    className="form-control"
-                                    name="libro"
-                                    value={this.state.libro}
-                                    onChange={this.onChangeLibro}
-                                    validations={[required]} />
+                <label htmlFor="libro"><span>Libro</span></label>
+                    <select className="form-control" value={this.state.libro} onChange={this.onChangeLibro}>
+                        {this.TodosLibros()}
+                    </select>
                 </div>
 
                 <div className="mb-3">

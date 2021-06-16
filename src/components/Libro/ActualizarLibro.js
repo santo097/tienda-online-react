@@ -6,6 +6,7 @@ import CheckButton from "react-validation/build/button";
 import AuthService from '../../services/auth.services';
 import axios from 'axios';
 import authHeader from '../../services/auth-header';
+import libroServices from '../../services/libro.services';
 
 const required = value => {
     if (!value) {
@@ -48,9 +49,9 @@ export default class ActualizarLibro extends Component{
     }
 
     componentDidMount(){
-        const currentUser = AuthService.getCurrentUser();
-        console.log(currentUser.id);
-        axios.get('https://tienda-libros.herokuapp.com/api/libro/'+currentUser.id, {headers:authHeader()})
+        console.log(this.props.match.params.id);
+        
+        axios.get('https://tienda-libros.herokuapp.com/api/libro/'+this.props.match.params.id, {headers:authHeader()})
         .then(user =>{
             console.log(user.data);
             this.setState({
@@ -145,7 +146,8 @@ export default class ActualizarLibro extends Component{
 
         if(this.checkBtn.context._errors.length === 0){
 
-            AuthService.update(
+            libroServices.Actualizar(
+                this.props.match.params.id,
                 this.state.titulo,
                 this.state.autor,
                 this.state.año_publicacion,

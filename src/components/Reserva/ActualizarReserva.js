@@ -123,7 +123,7 @@ export default class ActualizarReserva extends Component{
                 {!this.state.successful && (                <div>
                 <div className="mb-3">
                 <label htmlFor="libro">Libro</label>
-                    <select className="form-control">
+                    <select  value={this.state.libro} onChange={this.onChangeLibro} className="form-control">
                         {this.TodosLibros()}
                     </select>
                 </div>

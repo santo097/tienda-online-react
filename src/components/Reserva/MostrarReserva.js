@@ -1,15 +1,14 @@
 import axios from "axios";
 import React, {Component} from "react";
 import {Link } from "react-router-dom";
-import AuthService from "../../services/auth.services";
 import authHeader from '../../services/auth-header';
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faEye, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 const Reserva = props =>(
   <tr>
     <td>{props.reserva.libro}</td>
     <td>{props.reserva.cantidad}</td>
-    {/* <td><Link to="/actualizarLibro"></Link></td>
-    <td><Link to="#"></Link></td> */}
+    <td><Link to={"/actualizarReserva/"+props.reserva.id}></Link></td>
   </tr>
 
 )
@@ -44,12 +43,14 @@ export default class MostrarLibro extends Component{
                 <tr>
                     <th scope="col">Titulo</th>
                     <th scope="col">Cantidad</th>
+                    <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
                 {this.Reserva()}
               </tbody>
             </table>
+            <div><Link to="/crearReserva" className="btn btn-success"><FontAwesomeIcon icon={faPlus}/> Crear reserva</Link></div>
           </div>
         </div>
 
