@@ -75,7 +75,7 @@ export default class Register extends Component {
         this.onChangeCorreo = this.onChangeCorreo.bind(this);
         this.onChangeFechaNacimiento = this.onChangeFechaNacimiento.bind(this);
         this.onChangeContraseña = this.onChangeContraseña.bind(this);
-        
+
         this.state = {
             nombre_usuario:"",
             cedula:0,
