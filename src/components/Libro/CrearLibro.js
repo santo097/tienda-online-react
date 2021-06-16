@@ -3,10 +3,6 @@ import React, {Component} from 'react';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
-import AuthService from '../../services/auth.services';
-import axios from 'axios';
-import authHeader from '../../services/auth-header';
 import libroServices from '../../services/libro.services';
 const required = value => {
     if (!value) {

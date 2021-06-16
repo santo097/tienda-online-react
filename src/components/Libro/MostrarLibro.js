@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, {Component} from "react";
 import {Link } from "react-router-dom";
-import AuthService from "../../services/auth.services";
 import authHeader from '../../services/auth-header';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faEye, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const Libro = props =>(
   <tr>
