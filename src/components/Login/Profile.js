@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import AuthService from "../../services/auth.services";
-import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 export default class Profile extends Component {
