@@ -20,6 +20,7 @@ import MostrarReserva from "../Reserva/MostrarReserva";
 import MostrarLibro from "../Libro/MostrarLibro";
 import RecuperarContraseña from '../Login/RecuperarContraseña';
 import MostrarLibroUser from '../Libro/mostrarLibroUser';
+import Bienvenido from '../Login/welcome';
 
 export default class Navbar extends Component {
     constructor(props){
@@ -131,7 +132,7 @@ export default class Navbar extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />
-          <Route path="/admin" component={BoardAdmin} />
+          <Route path="/bienvenido" component={Bienvenido} />
           <Route path="/cliente" component={BoardCliente} />
           <Route path="/actualizarCliente" component={UpdateProfile} />
           <Route path="/actualizarLibro/:id" component={ActualizarLibro} />
