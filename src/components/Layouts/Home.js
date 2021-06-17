@@ -35,8 +35,7 @@ export default class Home extends Component {
       <main role="main">
         <div class="jumbotron">
           <div class="container">
-            <h1 class="display-3">BIENVENIDO!</h1>
-            <h3>COMPRA TUS LIBROS ONLINE</h3>
+            <h1 class="display-3">COMPRA DE LIBROS ONLINE</h1>
             <p><Link class="btn btn-primary btn-lg" to={"/register"} role="button">Registrate</Link></p>
           </div>
         </div>
