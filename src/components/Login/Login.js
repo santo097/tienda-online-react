@@ -130,7 +130,7 @@ export default class Login extends Component {
                     <span>Login</span>
                   </button>
                 </div>
-                <Link to={"/recuperarContraseña"} >¿no recuerda su contraseña?</Link>
+                <Link to={"/recuperarContraseña"} >¿Olvido su contraseña?</Link>
                 {this.state.message && (
                   <div className="form-group">
                     <div className="alert alert-danger" role="alert">

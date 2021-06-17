@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import UserService from "../../services/user.services";
 
+import { Link } from "react-router-dom";
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -31,11 +32,14 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-        </header>
-      </div>
+      <main role="main">
+        <div class="jumbotron">
+          <div class="container">
+            <h1 class="display-3">BIENVENIDO!</h1>
+            <p><Link class="btn btn-primary btn-lg" to={"/register"} role="button">Registrate</Link></p>
+          </div>
+        </div>
+        </main>
     );
   }
 }

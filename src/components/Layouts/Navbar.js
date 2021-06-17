@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
 import Fondo from '../../background.jpg';
+import Background from '../../public/img/background.jpg'
 import AuthService from '../../services/auth.services';
 import '../../App.css'
 import Logo from '../../public/img/libro_logo.png'
@@ -141,7 +142,7 @@ export default class Navbar extends Component {
 const sectionStyle = {
   width: "100%",
   height: "600px",
-  backgroundImage: `url(${Fondo})`,
+  backgroundImage: `url(${Background})`,
 };
 
 const logoStyle = {backgroundImage:`url(${Logo})`}
