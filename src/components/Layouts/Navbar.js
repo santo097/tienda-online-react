@@ -17,6 +17,7 @@ import ActualizarReserva from '../Reserva/ActualizarReserva';
 import CrearReserva from '../Reserva/CrearReserva';
 import MostrarReserva from "../Reserva/MostrarReserva";
 import MostrarLibro from "../Libro/MostrarLibro";
+import RecuperarContraseña from '../Login/RecuperarContraseña';
 
 export default class Navbar extends Component {
     constructor(props){
@@ -56,7 +57,7 @@ export default class Navbar extends Component {
 
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            COMPRA DE LIBROS ONLINE
+            COMPRA DE LIBROS EN LINEA
           </Link>
           <div className="navbar-nav mr-auto">
 
@@ -130,6 +131,7 @@ export default class Navbar extends Component {
           <Route path="/actualizarReserva" component={ActualizarReserva} />
           <Route path="/mostrarReserva" component={MostrarReserva} />
           <Route path="/mostrarLibro" component={MostrarLibro} />
+          <Route path="/recuperarContraseña" component={RecuperarContraseña} />
         </Switch>
       </div>
     </div>

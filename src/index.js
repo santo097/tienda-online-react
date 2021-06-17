@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-document.title = "COMPRA DE LIBROS ONLINE";
+document.title = "COMPRA DE LIBROS EN LINEA";
 
 ReactDOM.render(
   <BrowserRouter>

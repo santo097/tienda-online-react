@@ -58,6 +58,13 @@ class AuthService {
     getCurrentUser() {
       return JSON.parse(localStorage.getItem('user'));;
     }
+
+    recuperarContraseña(correo,contraseña){
+      return axios.post('https://tienda-libros.herokuapp.com/api/usuarios/recuperar', {
+        correo,
+        contraseña
+      });
+    }
   }
   
   export default new AuthService();

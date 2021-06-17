@@ -3,6 +3,7 @@ import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import AuthService from '../../services/auth.services';
+import { Link } from 'react-router-dom';
 
 const required = (value) =>{
     if(!value){
@@ -129,7 +130,7 @@ export default class Login extends Component {
                     <span>Login</span>
                   </button>
                 </div>
-    
+                <Link to={"/recuperarContraseña"} >¿no recuerda su contraseña?</Link>
                 {this.state.message && (
                   <div className="form-group">
                     <div className="alert alert-danger" role="alert">
