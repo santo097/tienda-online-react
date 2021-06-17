@@ -19,6 +19,7 @@ import CrearReserva from '../Reserva/CrearReserva';
 import MostrarReserva from "../Reserva/MostrarReserva";
 import MostrarLibro from "../Libro/MostrarLibro";
 import RecuperarContraseña from '../Login/RecuperarContraseña';
+import MostrarLibroUser from '../Libro/mostrarLibroUser';
 
 export default class Navbar extends Component {
     constructor(props){
@@ -62,9 +63,16 @@ export default class Navbar extends Component {
           </Link>
           <div className="navbar-nav mr-auto">
 
-            {currentUser && (
+            {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/mostrarLibro"} className="nav-link">
+                  Libros
+                </Link>
+            </li>
+            )}
+            {showClienteBoard && (
+              <li className="nav-item">
+                <Link to={"/mostrarLibros"} className="nav-link">
                   Libros
                 </Link>
             </li>
@@ -132,6 +140,7 @@ export default class Navbar extends Component {
           <Route path="/actualizarReserva" component={ActualizarReserva} />
           <Route path="/mostrarReserva" component={MostrarReserva} />
           <Route path="/mostrarLibro" component={MostrarLibro} />
+          <Route path="/mostrarLibros" component={MostrarLibroUser} />
           <Route path="/recuperarContraseña" component={RecuperarContraseña} />
         </Switch>
       </div>
