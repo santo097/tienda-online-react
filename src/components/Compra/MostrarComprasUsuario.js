@@ -2,19 +2,19 @@ import axios from "axios";
 import React, {Component} from "react";
 import {Link } from "react-router-dom";
 import authHeader from '../../services/auth-header';
+import authServices from '../../services/auth.services';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import Reservar from '../../services/reserva.services';
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 const Reserva = props =>(
   <tr>
     <td>{props.reserva.libro}</td>
     <td>{props.reserva.cantidad}</td>
-    <td><Link className="btn btn-danger"  href="/mostrarReserva" onClick={() =>{Reservar.Eliminar(props.reserva.id) }}><FontAwesomeIcon icon={faTrashAlt}/></Link></td>
   </tr>
 
 )
 
-export default class MostrarLibro extends Component{
+export default class MostrarComprasUsuario extends Component{
     constructor(props){
         super(props);
 
@@ -23,15 +23,14 @@ export default class MostrarLibro extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://tienda-libros.herokuapp.com/api/reserva', {headers:authHeader()})
+        const usuario = authServices.getCurrentUser();
+        const id_usuario = usuario.id;
+        const url = 'https://tienda-libros.herokuapp.com/api/compra/'+id_usuario;
+        axios.get(url, {headers:authHeader()})
         .then(reserva =>{
+          console.log(reserva.data);
           this.setState({reserva:reserva.data});
         })
-    }
-
-    Eliminar(){
-      Reservar.Eliminar(this.props.reserva.id);
-      this.props.history.push("/mostrarReserva");
     }
 
     Reserva(){
@@ -56,6 +55,7 @@ export default class MostrarLibro extends Component{
                 {this.Reserva()}
               </tbody>
             </table>
+            <div><Link to="/crearCompra" className="btn btn-success"><FontAwesomeIcon icon={faPlus}/>Agregar Compra</Link></div>
           </div>
         </div>
 

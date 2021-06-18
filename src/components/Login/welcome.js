@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
 import UserService from "../../services/user.services";
-
-import { Link } from "react-router-dom";
 export default class Bienvenido extends Component {
   constructor(props) {
     super(props);

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import Reserva from '../../services/reserva.services';
+import Compras from '../../services/compra.services';
 import Libro from '../../services/libro.services';
 import authServices from '../../services/auth.services';
 
@@ -20,7 +20,7 @@ const Libros = props =>(
     <option>{props.libro.titulo}</option>
 );
 
-export default class CrearReserva extends Component{
+export default class CrearCompra extends Component{
     constructor(props){
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
@@ -70,17 +70,15 @@ export default class CrearReserva extends Component{
         this.form.validateAll();
  
         if(this.checkBtn.context._errors.length === 0){
-            // console.log(this.state.id_usuario+' '+this.state.libro+' '+this.state.cantidad)
-            Reserva.Guardar(
+            Compras.Guardar(
                 this.state.id_usuario,
                 this.state.libro,
                 this.state.cantidad,
-                this.state.estado
             )
             .then(
                 response =>{
                     this.setState({
-                        message: "Reserva Agregada!",
+                        message: "Compra Agregada!",
                         successful: true
                       });
                 },
@@ -135,7 +133,7 @@ export default class CrearReserva extends Component{
 
 
                 <div className="form-group">
-                    <button className="btn btn-primary btn-block">Reservar</button>
+                    <button className="btn btn-primary btn-block">Comprar</button>
                 </div>
                 </div>)}
 

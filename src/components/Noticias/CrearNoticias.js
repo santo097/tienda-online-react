@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import Reserva from '../../services/reserva.services';
-import Libro from '../../services/libro.services';
-import authServices from '../../services/auth.services';
+import Noticias from '../../services/noticias.services';
 
 const required = value => {
     if (!value) {
@@ -16,47 +14,30 @@ const required = value => {
     }
   };
 
-const Libros = props =>(
-    <option>{props.libro.titulo}</option>
-);
 
-export default class CrearReserva extends Component{
+export default class CrearNoticias extends Component{
     constructor(props){
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
-        this.onChangeLibro = this.onChangeLibro.bind(this);
-        this.onChangeCantidad = this.onChangeCantidad.bind(this);
+        this.onChangeTitulo = this.onChangeTitulo.bind(this);
+        this.onChangeNoticia = this.onChangeNoticia.bind(this);
         this.state = {
-            id_usuario:0,
-            libro:"",
-            cantidad:0,
-            estado:true,
+            titulo:"",
+            noticia:"",
             successful:false,
-            message:"",
-            titulo:[]
+            message:""
         }
     }
 
-    componentDidMount(){
-        Libro.Mostrar()
-        .then(libro =>{
-            const id = authServices.getCurrentUser();
-            this.setState({
-                id_usuario:id.id
-            })
-          this.setState({titulo:libro.data});
-        })
-    }
-
-    onChangeLibro(e){
+    onChangeTitulo(e){
         this.setState({
-            libro: e.target.value
+            titulo:e.target.value
         });
     }
 
-    onChangeCantidad(e){
+    onChangeNoticia(e){
         this.setState({
-            cantidad:e.target.value
+            noticia:e.target.value
         });
     }
 
@@ -68,19 +49,18 @@ export default class CrearReserva extends Component{
         });
 
         this.form.validateAll();
- 
+
         if(this.checkBtn.context._errors.length === 0){
-            // console.log(this.state.id_usuario+' '+this.state.libro+' '+this.state.cantidad)
-            Reserva.Guardar(
-                this.state.id_usuario,
-                this.state.libro,
-                this.state.cantidad,
-                this.state.estado
+            Noticias.Guardar(
+                this.state.titulo,
+                this.state.noticia,
+                
+
             )
             .then(
                 response =>{
                     this.setState({
-                        message: "Reserva Agregada!",
+                        message: response.data.message,
                         successful: true
                       });
                 },
@@ -91,7 +71,7 @@ export default class CrearReserva extends Component{
                       error.response.data.message) ||
                     error.message ||
                     error.toString();
-        
+
                   this.setState({
                     successful: false,
                     message: resMessage
@@ -101,41 +81,36 @@ export default class CrearReserva extends Component{
         }
     }
 
-    TodosLibros(){
-        return this.state.titulo.map((actualLibro, i)=>{
-            return <Libros libro={actualLibro} key={i}/>
-        })
-    }
-
     render(){
-
         return(
-            <div className="row col-md-8">
-
+            <div className="row">
                 <Form onSubmit={this.handleRegister} ref={c =>{this.form = c;}}>
                 {!this.state.successful && (                <div>
                 <div className="mb-3">
-                <label htmlFor="libro"><span>Libro</span></label>
-                    <select className="form-control" value={this.state.libro} onChange={this.onChangeLibro}>
-                        {this.TodosLibros()}
-                    </select>
-                </div>
-
-                <div className="mb-3">
-                <label htmlFor="cantidad">Cantidad</label>
+                <label htmlFor="titulo">Titulo</label>
                                     <Input 
-                                    type="number"
+                                    type="text"
                                     className="form-control"
-                                    name="cantidad"
-                                    value={this.state.cantidad}
-                                    onChange={this.onChangeCantidad}
+                                    name="titulo"
+                                    value={this.state.titulo}
+                                    onChange={this.onChangeTitulo}
                                     validations={[required]}
-                />
+                                    />
                 </div>
-
-
+                <div className="mb-3">
+                <label htmlFor="noticias">Noticia</label>
+                                    <Input 
+                                    type="text"
+                                    className="form-control"
+                                    name="noticia"
+                                    value={this.state.noticia}
+                                    onChange={this.onChangeNoticia}
+                                    validations={[required
+                                    ]}
+                                    />
+                </div>
                 <div className="form-group">
-                    <button className="btn btn-primary btn-block">Reservar</button>
+                    <button className="btn btn-primary btn-block">Agregar</button>
                 </div>
                 </div>)}
 

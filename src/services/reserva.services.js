@@ -1,15 +1,14 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-// const API_URL = "";
-
 class Reserva{
-    Guardar = (id_usuario,libro,cantidad) =>{
+    Guardar = (id_usuario,libro,cantidad,estado) =>{
         return axios.post('https://tienda-libros.herokuapp.com/api/reserva/guardar',
         {
             id_usuario,
             libro,
-            cantidad
+            cantidad,
+            estado
         },{headers:authHeader()})
     }
 
@@ -19,6 +18,10 @@ class Reserva{
 
     BuscarPorId = (id) =>{
         return axios.get('https://tienda-libros.herokuapp.com/api/reserva/'+ id,{headers:authHeader()} )
+    }
+
+    Eliminar = (id) =>{
+        return axios.get('https://tienda-libros.herokuapp.com/api/reserva/borrar/'+ id, {headers:authHeader()});
     }
 }
 

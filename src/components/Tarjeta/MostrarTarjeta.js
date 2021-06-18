@@ -3,18 +3,19 @@ import React, {Component} from "react";
 import {Link } from "react-router-dom";
 import authHeader from '../../services/auth-header';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import Reservar from '../../services/reserva.services';
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 const Reserva = props =>(
   <tr>
-    <td>{props.reserva.libro}</td>
-    <td>{props.reserva.cantidad}</td>
-    <td><Link className="btn btn-danger"  href="/mostrarReserva" onClick={() =>{Reservar.Eliminar(props.reserva.id) }}><FontAwesomeIcon icon={faTrashAlt}/></Link></td>
+    <td>{props.reserva.nombre_propietario}</td>
+    <td>{props.reserva.numero_tarjeta}</td>
+    <td>{props.reserva.fecha_vencimiento}</td>
+    <td>{props.reserva.codigo_seguridad}</td>
   </tr>
 
 )
 
-export default class MostrarLibro extends Component{
+export default class MostrarTarjeta extends Component{
     constructor(props){
         super(props);
 
@@ -23,15 +24,11 @@ export default class MostrarLibro extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://tienda-libros.herokuapp.com/api/reserva', {headers:authHeader()})
+        const url = 'https://tienda-libros.herokuapp.com/api/tarjeta';
+        axios.get(url, {headers:authHeader()})
         .then(reserva =>{
           this.setState({reserva:reserva.data});
         })
-    }
-
-    Eliminar(){
-      Reservar.Eliminar(this.props.reserva.id);
-      this.props.history.push("/mostrarReserva");
     }
 
     Reserva(){
@@ -47,15 +44,17 @@ export default class MostrarLibro extends Component{
             <table class="table table-dark">
               <thead>
                 <tr>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col"></th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Numero tarjeta</th>
+                    <th scope="col">Fecha de Tarjeta</th>
+                    <th scope="col">Codigo de seguridad</th>
                 </tr>
               </thead>
               <tbody>
                 {this.Reserva()}
               </tbody>
             </table>
+            
           </div>
         </div>
 

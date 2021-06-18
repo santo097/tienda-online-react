@@ -4,8 +4,8 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import Reserva from '../../services/reserva.services';
 import Libro from '../../services/libro.services';
+import Tarjeta from '../../services/tarjeta.services';
 import authServices from '../../services/auth.services';
-
 const required = value => {
     if (!value) {
       return (
@@ -16,24 +16,24 @@ const required = value => {
     }
   };
 
-const Libros = props =>(
-    <option>{props.libro.titulo}</option>
-);
 
-export default class CrearReserva extends Component{
+export default class CrearTarjeta extends Component{
     constructor(props){
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
-        this.onChangeLibro = this.onChangeLibro.bind(this);
-        this.onChangeCantidad = this.onChangeCantidad.bind(this);
+        this.onChangeNombre_propietario = this.onChangeNombre_propietario.bind(this);
+        this.onChangeNumero_tarjeta = this.onChangeNumero_tarjeta.bind(this);
+        this.onChangeFecha_vencimiento = this.onChangeFecha_vencimiento.bind(this);
+        this.onChangeCodigo_seguridad = this.onChangeCodigo_seguridad.bind(this);
+
         this.state = {
             id_usuario:0,
-            libro:"",
-            cantidad:0,
-            estado:true,
+            nombre_propietario:"",
+            numero_tarjeta:0,
+            fecha_vencimiento:Date(),
+            codigo_seguridad:0,
             successful:false,
             message:"",
-            titulo:[]
         }
     }
 
@@ -48,15 +48,25 @@ export default class CrearReserva extends Component{
         })
     }
 
-    onChangeLibro(e){
+    onChangeNombre_propietario(e){
         this.setState({
-            libro: e.target.value
+            nombre_propietario: e.target.value
+        });
+    }
+    onChangeNumero_tarjeta(e){
+        this.setState({
+            numero_tarjeta: e.target.value
+        });
+    }
+    onChangeFecha_vencimiento(e){
+        this.setState({
+            fecha_vencimiento: e.target.value
         });
     }
 
-    onChangeCantidad(e){
+    onChangeCodigo_seguridad(e){
         this.setState({
-            cantidad:e.target.value
+            codigo_seguridad:e.target.value
         });
     }
 
@@ -70,17 +80,17 @@ export default class CrearReserva extends Component{
         this.form.validateAll();
  
         if(this.checkBtn.context._errors.length === 0){
-            // console.log(this.state.id_usuario+' '+this.state.libro+' '+this.state.cantidad)
-            Reserva.Guardar(
+            Tarjeta.Guardar(
                 this.state.id_usuario,
-                this.state.libro,
-                this.state.cantidad,
-                this.state.estado
+                this.state.nombre_propietario,
+                this.state.numero_tarjeta,
+                this.state.fecha_vencimiento,
+                this.state.codigo_seguridad
             )
             .then(
                 response =>{
                     this.setState({
-                        message: "Reserva Agregada!",
+                        message: "Tarjeta Agregada!",
                         successful: true
                       });
                 },
@@ -101,12 +111,6 @@ export default class CrearReserva extends Component{
         }
     }
 
-    TodosLibros(){
-        return this.state.titulo.map((actualLibro, i)=>{
-            return <Libros libro={actualLibro} key={i}/>
-        })
-    }
-
     render(){
 
         return(
@@ -115,27 +119,54 @@ export default class CrearReserva extends Component{
                 <Form onSubmit={this.handleRegister} ref={c =>{this.form = c;}}>
                 {!this.state.successful && (                <div>
                 <div className="mb-3">
-                <label htmlFor="libro"><span>Libro</span></label>
-                    <select className="form-control" value={this.state.libro} onChange={this.onChangeLibro}>
-                        {this.TodosLibros()}
-                    </select>
+                <label htmlFor="nombre_propietario"><span>Nombre</span></label>
+                <Input 
+                                    type="text"
+                                    className="form-control"
+                                    name="nombre_propietario"
+                                    value={this.state.nombre_propietario}
+                                    onChange={this.onChangeNombre_propietario}
+                                    validations={[required]}
+                />
                 </div>
 
                 <div className="mb-3">
-                <label htmlFor="cantidad">Cantidad</label>
+                <label htmlFor="numero_tarjeta">Numero de tarjeta</label>
                                     <Input 
                                     type="number"
                                     className="form-control"
-                                    name="cantidad"
-                                    value={this.state.cantidad}
-                                    onChange={this.onChangeCantidad}
+                                    name="numero_tarjeta"
+                                    value={this.state.numero_tarjeta}
+                                    onChange={this.onChangeNumero_tarjeta}
+                                    validations={[required]}
+                />
+                </div>
+                <div className="mb-3">
+                <label htmlFor="fecha_vencimiento">Fecha de Tarjeta</label>
+                                    <Input 
+                                    type="date"
+                                    className="form-control"
+                                    name="fecha_vencimiento"
+                                    value={this.state.fecha_vencimiento}
+                                    onChange={this.onChangeFecha_vencimiento}
+                                    validations={[required]}
+                />
+                </div>
+                <div className="mb-3">
+                <label htmlFor="codigo_seguridad">Codigo de seguridad</label>
+                                    <Input 
+                                    type="number"
+                                    className="form-control"
+                                    name="codigo_seguridad"
+                                    value={this.state.codigo_seguridad}
+                                    onChange={this.onChangeCodigo_seguridad}
                                     validations={[required]}
                 />
                 </div>
 
 
                 <div className="form-group">
-                    <button className="btn btn-primary btn-block">Reservar</button>
+                    <button className="btn btn-primary btn-block">Agregar</button>
                 </div>
                 </div>)}
 

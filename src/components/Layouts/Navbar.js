@@ -9,7 +9,6 @@ import Login from '../Login/Login';
 import Register from '../Login/Register';
 import Home from './Home';
 import Profile from '../Login/Profile'
-import BoardAdmin from '../Admin/BoardAdmin';
 import BoardCliente from '../Clientes/BoardClientes';
 import UpdateProfile from '../Login/UpdateProfile';
 import CrearLibro from '../Libro/CrearLibro';
@@ -21,6 +20,16 @@ import MostrarLibro from "../Libro/MostrarLibro";
 import RecuperarContraseña from '../Login/RecuperarContraseña';
 import MostrarLibroUser from '../Libro/mostrarLibroUser';
 import Bienvenido from '../Login/welcome';
+import MostrarReservaUsuarios from '../Reserva/MostrarReservaUsuarios';
+import MostrarCompras from '../Compra/MostrarComprasUsuario';
+import MostrarTarjeta from '../Tarjeta/MostrarTarjeta';
+import MostrarTarjetaUsuario from '../Tarjeta/MostrarTarjetaUsuario';
+import MostrarComprasUsuario from '../Compra/MostrarComprasUsuario';
+import CrearCompra from '../Compra/CrearCompra';
+import CrearNoticias from '../Noticias/CrearNoticias';
+import CrearTarjeta from '../Tarjeta/CrearTarjeta';
+import MostrarNoticias from '../Noticias/MostrarNoticias';
+import MostrarNoticiasUsuario from '../Noticias/MostrarNoticiasUsuario';
 
 export default class Navbar extends Component {
     constructor(props){
@@ -78,12 +87,40 @@ export default class Navbar extends Component {
                 </Link>
             </li>
             )}
-            {currentUser && (
+            {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/mostrarReserva"} className="nav-link">
                   Reservas
                 </Link>
             </li>
+            )}
+            {showClienteBoard && (
+              <li className="nav-item">
+                <Link to={"/mostrarCompras"} className="nav-link">
+                  Compras
+                </Link>
+            </li>
+            )}
+            {showClienteBoard && (
+              <li className="nav-item">
+                <Link to={"/mostrarTarjetas"} className="nav-link">
+                  Tarjetas
+                </Link>
+            </li>
+            )}
+            {showClienteBoard && (
+              <li className="nav-item">
+                <Link to={"/mostrarNoticias"} className="nav-link">
+                  Noticias
+                </Link>
+              </li>
+            )}
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/mostrarNoticia"} className="nav-link">
+                  Noticias
+                </Link>
+              </li>
             )}
 
             {currentUser && (
@@ -140,8 +177,18 @@ export default class Navbar extends Component {
           <Route path="/crearReserva" component={CrearReserva} />
           <Route path="/actualizarReserva" component={ActualizarReserva} />
           <Route path="/mostrarReserva" component={MostrarReserva} />
+          <Route path="/mostrarReservas" component={MostrarReservaUsuarios} />
           <Route path="/mostrarLibro" component={MostrarLibro} />
           <Route path="/mostrarLibros" component={MostrarLibroUser} />
+          <Route path="/mostrarTarjeta" component={MostrarTarjeta} />
+          <Route path="/mostrarTarjetas" component={MostrarTarjetaUsuario} />
+          <Route path="/mostrarCompra" component={MostrarCompras} />
+          <Route path="/mostrarCompras" component={MostrarComprasUsuario} />
+          <Route path="/mostrarNoticia" component={MostrarNoticias} />
+          <Route path="/mostrarNoticias" component={MostrarNoticiasUsuario} />
+          <Route path="/crearCompra" component={CrearCompra} />
+          <Route path="/crearNoticias" component={CrearNoticias} />
+          <Route path="/crearTarjeta" component={CrearTarjeta} />
           <Route path="/recuperarContraseña" component={RecuperarContraseña} />
         </Switch>
       </div>
@@ -154,5 +201,3 @@ const sectionStyle = {
   height: "600px",
   backgroundImage: `url(${Background})`,
 };
-
-const logoStyle = {backgroundImage:`url(${Logo})`}
