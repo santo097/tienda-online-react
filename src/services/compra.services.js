@@ -2,12 +2,10 @@ import axios from 'axios';
 import authHeader from './auth-header';
 import auth from './auth.services';
 class Comprar{
-    Guardar = (libro,cantidad) =>{
-        const id = auth.getCurrentUser();
-        const t = id.id;
-        return axios.post('https://tienda-libros.herokuapp.com/api/compra/guardar/'+id.id,
+    Guardar = (id_usuario,libro,cantidad) =>{
+        return axios.post('https://tienda-libros.herokuapp.com/api/compra/guardar',
         {
-            t,
+            id_usuario,
             libro,
             cantidad
         },{headers:authHeader()})

@@ -41,9 +41,11 @@ export default class CrearCompra extends Component{
         Libro.Mostrar()
         .then(libro =>{
             const id = authServices.getCurrentUser();
+            console.log(id.id);
             this.setState({
                 id_usuario:id.id
             })
+            console.log(this.state.id_usuario);
           this.setState({titulo:libro.data});
         })
     }
@@ -70,6 +72,7 @@ export default class CrearCompra extends Component{
         this.form.validateAll();
  
         if(this.checkBtn.context._errors.length === 0){
+            console.log(this.state.id_usuario+ ' '+ this.state.libro+' '+ this.state.cantidad);
             Compras.Guardar(
                 this.state.id_usuario,
                 this.state.libro,
