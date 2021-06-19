@@ -5,7 +5,7 @@ class Comprar{
     Guardar = (libro,cantidad) =>{
         const id = auth.getCurrentUser();
         const t = id.id;
-        return axios.post('http://localhost:3001/api/compra/guardar/'+id.id,
+        return axios.post('https://tienda-libros.herokuapp.com/api/compra/guardar/'+id.id,
         {
             t,
             libro,
