@@ -11,8 +11,14 @@ class Comprar{
         },{headers:authHeader()})
     }
 
+
+
     Mostrar = () =>{
         return axios.get('https://tienda-libros.herokuapp.com/api/tarjeta',{headers:authHeader()} )
+    }
+
+    MostrarUsuario = (id) =>{
+        return axios.get('https://tienda-libros.herokuapp.com/api/compra/'+id, {headers:authHeader()} )
     }
 }
 

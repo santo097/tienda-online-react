@@ -21,7 +21,7 @@ import RecuperarContraseña from '../Login/RecuperarContraseña';
 import MostrarLibroUser from '../Libro/mostrarLibroUser';
 import Bienvenido from '../Login/welcome';
 import MostrarReservaUsuarios from '../Reserva/MostrarReservaUsuarios';
-import MostrarCompras from '../Compra/MostrarComprasUsuario';
+import MostrarCompras from '../Compra/MostrarCompras';
 import MostrarTarjeta from '../Tarjeta/MostrarTarjeta';
 import MostrarTarjetaUsuario from '../Tarjeta/MostrarTarjetaUsuario';
 import MostrarComprasUsuario from '../Compra/MostrarComprasUsuario';
@@ -87,6 +87,13 @@ export default class Navbar extends Component {
                 </Link>
             </li>
             )}
+            {showClienteBoard && (
+              <li className="nav-item">
+                <Link to={"/mostrarReservas"} className="nav-link">
+                  Reserva
+                </Link>
+            </li>
+            )}
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/mostrarReserva"} className="nav-link">
@@ -119,6 +126,13 @@ export default class Navbar extends Component {
               <li className="nav-item">
                 <Link to={"/mostrarNoticia"} className="nav-link">
                   Noticias
+                </Link>
+              </li>
+            )}
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/mostrarCompra"} className="nav-link">
+                  Compras
                 </Link>
               </li>
             )}

@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, {Component} from "react";
-import {Link } from "react-router-dom";
+
 import authHeader from '../../services/auth-header';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 
 const Reserva = props =>(
   <tr>
